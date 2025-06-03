@@ -157,6 +157,9 @@ Summary Container:
 - id (appId), summary, updated
 ```
 
+### Azure Key Vault
+- `dbconnstring` - DB Connection string
+
 ## 🔐 Security & Permissions
 
 ### AWS IAM Permissions
