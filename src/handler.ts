@@ -1,6 +1,7 @@
 import { DynamoDBProvider } from "./aws/DynamoDBProvider";
 import { CosmosDBProvider } from "./azure/CosmosDBProvider";
 import { IDatabaseProvider } from "./interfaces/IDatabaseProvider";
+import { KeyVaultProvider } from "./azure/KeyVaultProvider";
 import { SummaryService } from "./services/SummaryService";
 
 /**
@@ -24,8 +25,10 @@ export const handler = async ( event: any, context: any ): Promise<any> => {
     let requestBody: any = null;
     let dbProvider: IDatabaseProvider = new DynamoDBProvider();
     // Handling request based on platform
-    if (platform === 'azure') {  
-      dbProvider = new CosmosDBProvider();
+    if (platform === 'azure') {
+      let secProvider = new KeyVaultProvider();
+      const connectionString = await secProvider.getSecret('dbconnstring');
+      dbProvider = new CosmosDBProvider(connectionString);
       try {
           requestBody = await event.json();
       } catch (error: any) {

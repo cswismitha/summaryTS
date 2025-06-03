@@ -24,7 +24,8 @@ interface AppConfig {
     sqsURL: string;
     ddb: DynamoDBConfig;
     azqueue: AzureQueueConfig;
-    vault: string
+    vault: string;
+    clientID: string;
 }
 
 const config: AppConfig = {
@@ -46,7 +47,8 @@ const config: AppConfig = {
         queuename: process.env.AZQUEUE_NAME || 'js-queue-items',
         queueurl: process.env.AZQUEUE_URL
     },
-    vault: process.env.KEY_VAULT_URL
+    vault: process.env.KEY_VAULT_URL,
+    clientID: process.env.CLIENT_ID
 };
 
 export default config;

@@ -6,8 +6,7 @@ import config from '../config/config';
 export class CosmosDBProvider implements IDatabaseProvider {
     private client;
 
-    constructor() {
-        const connectionString = this.cosmosConfig.endpoint;
+    constructor(connectionString: string) {
         this.client = new CosmosClient(connectionString);
     }
 
